@@ -11,3 +11,15 @@
   font-size: 1.2rem;
   text-decoration: none;
 }
+
+.cardImages {
+  background-color: black;
+  display: inline;
+}
+
+.individual-card {
+  padding: 10px;
+}
+
+.nosearch {
+}

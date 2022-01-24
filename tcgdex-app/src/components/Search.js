@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 export default function Search() {
   const [pokename, setPokename] = useState("");
   const [cards, setCards] = useState([]);
+  const [cardsFetched, setCardsFetched] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ export default function Search() {
       });*/
       const cardData = await response.json();
       setCards(cardData);
+      setCardsFetched(true);
       console.log(response);
       console.log(cards);
     } catch (err) {
@@ -30,15 +32,18 @@ export default function Search() {
         ></input>
         <button onClick={handleSubmit}>Search</button>
       </form>
-      {
-        <div className="card-images">
-          {cards.data.map((card) => (
-            <div key={card.id}>
+
+      <div className="cardImages">
+        {cardsFetched ? (
+          cards.data.map((card) => (
+            <div className="individual-card" key={card.id}>
               <img src={card.images.small} />
             </div>
-          ))}
-        </div>
-      }
+          ))
+        ) : (
+          <div className="nosearch">Searched cards will appear below</div>
+        )}
+      </div>
     </Fragment>
   );
 }

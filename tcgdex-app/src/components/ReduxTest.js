@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCardsThunk } from "../redux/actions/cardsThunk";
+import { SET_USERNAME } from "../redux/actions/usernameActions";
 import { getUserThunk } from "../redux/actions/userThunk";
 
 export default function ReduxTest() {
@@ -28,13 +29,8 @@ export default function ReduxTest() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCardsThunk);
+    dispatch(getCardsThunk());
   }, [dispatch]);
-
-  const [user, isFetchingUser] = useSelector((state) => [
-    state.user.user,
-    state.user.isFetchingUser,
-  ]);
 
   const [email, setEmail] = useState("");
 
@@ -44,6 +40,7 @@ export default function ReduxTest() {
 
   const handleDispatch = () => {
     dispatch(getUserThunk(email));
+    dispatch({ type: SET_USERNAME });
   };
 
   return (
@@ -67,24 +64,6 @@ export default function ReduxTest() {
           )}{" "}
         </div>
       }
-
-      <div>
-        {isFetchingUser && user === {} ? (
-          <div>Fetching User...</div>
-        ) : (
-          <div>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <div>{user.collection_id}</div>
-          </div>
-        )}
-
-        <input
-          onChange={handleUserEmail}
-          placeholder="Search for an email here"
-        />
-        <button onClick={handleDispatch}>Search Email</button>
-      </div>
     </Fragment>
   );
 }
