@@ -78,7 +78,7 @@ export default function SignUp(props) {
   };
 
   if (redirect) {
-    return <Navigate to="/userProfile" />;
+    return <Navigate to="/home" />;
   }
 
   return (
