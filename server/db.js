@@ -81,11 +81,24 @@ const login = async (request, response) => {
   }
 };
 
-const getSpecificUser = async (request, response) => {
+const getSpecificUserByEmail = async (request, response) => {
   try {
     const { email } = request.params;
     const users = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
+    ]);
+
+    response.json(users.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const getSpecificUserByUsername = async (request, response) => {
+  try {
+    const { username } = request.params;
+    const users = await pool.query("SELECT * FROM users WHERE username = $1", [
+      username,
     ]);
 
     response.json(users.rows[0]);
@@ -99,18 +112,52 @@ const getSpecificUser = async (request, response) => {
 //card table functions
 const addCard = async (request, response) => {
   try {
-    const { card_id, pokemon, type, hp } = request.body;
+    const { card_id, pokemon, type, hp, image } = request.body;
     const newCard = await pool.query(
-      "INSERT INTO card (card_id, pokemon, type, hp) VALUES ($1, $2, $3, $4) RETURNING *",
-      [card_id, pokemon, type, hp]
+      "INSERT INTO card (card_id, pokemon, type, hp, image) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [card_id, pokemon, type, hp, image]
     );
-    const newCollection = await pool.query(
+    /*const newCollection = await pool.query(
       "INSERT INTO collection (card_id) VALUES ($1) RETURNING *",
       [card_id]
-    );
+    );*/
 
     response.json(newCard.rows[0]);
-    response.json(newCollection.rows[0]);
+    //response.json(newCollection.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const getCards = async (request, response) => {
+  try {
+    const allCards = await pool.query("SELECT * FROM card");
+    response.json(allCards.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const getCardsByPokemon = async (request, response) => {
+  try {
+    const { pokemon } = request.params;
+    allCardsForPokemon = await pool.query(
+      "SELECT * FROM card WHERE pokemon = $1",
+      [pokemon]
+    );
+    response.json(allCardsForPokemon.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const deleteCard = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const deleteCard = await pool.query("DELETE FROM card WHERE card_id = $1", [
+      id,
+    ]);
+    response.json("Card was removed from the list!");
   } catch (err) {
     console.error(err.message);
   }
@@ -121,5 +168,9 @@ module.exports = {
   createUser,
   login,
   addCard,
-  getSpecificUser,
+  getSpecificUserByEmail,
+  getSpecificUserByUsername,
+  getCards,
+  getCardsByPokemon,
+  deleteCard,
 };

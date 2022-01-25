@@ -16,9 +16,17 @@ app.post("/signup", db.createUser);
 
 app.post("/users", db.login);
 
+app.get("/users/:email", db.getSpecificUserByEmail);
+
+app.get("/usersname/:username", db.getSpecificUserByUsername);
+
 app.post("/card", db.addCard);
 
-app.get("/users/:email", db.getSpecificUser);
+app.get("/cards", db.getCards);
+
+app.get("/cards/:pokemon", db.getCardsByPokemon);
+
+app.delete("/card/:id", db.deleteCard);
 
 app.listen(5000, () => {
   console.log("server has started on port 5000");
