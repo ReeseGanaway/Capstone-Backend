@@ -28,6 +28,10 @@ app.get("/cards/:pokemon", db.getCardsByPokemon);
 
 app.delete("/card/:id", db.deleteCard);
 
+app.post("/collection", db.addCardToCollection);
+
+app.get("/collection", db.getCollection);
+
 app.listen(5000, () => {
   console.log("server has started on port 5000");
 });
