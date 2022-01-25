@@ -22,9 +22,11 @@ app.get("/usersname/:username", db.getSpecificUserByUsername);
 
 app.post("/card", db.addCard);
 
-app.get("/cards", db.getCards);
+app.get("/card", db.getCards);
 
 app.get("/cards/:pokemon", db.getCardsByPokemon);
+
+app.get("/card/:card_id", db.getCardById);
 
 app.delete("/card/:id", db.deleteCard);
 

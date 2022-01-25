@@ -163,6 +163,19 @@ const deleteCard = async (request, response) => {
   }
 };
 
+const getCardById = async (request, response) => {
+  try {
+    const { card_id } = request.params;
+    const card = await pool.query("SELECT * FROM card WHERE card_id = $1", [
+      card_id,
+    ]);
+
+    response.json(card.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 //Start collection table functions
 const addCardToCollection = async (request, response) => {
   try {
@@ -199,4 +212,5 @@ module.exports = {
   deleteCard,
   addCardToCollection,
   getCollection,
+  getCardById,
 };
