@@ -163,6 +163,30 @@ const deleteCard = async (request, response) => {
   }
 };
 
+//Start collection table functions
+const addCardToCollection = async (request, response) => {
+  try {
+    const { collection_id, card_id } = request.body;
+    const newCollection = await pool.query(
+      "INSERT INTO collection (collection_id, card_id) VALUES ($1, $2) RETURNING *",
+      [collection_id, card_id]
+    );
+
+    response.json(newCollection.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+const getCollection = async (request, response) => {
+  try {
+    const collection = await pool.query("SELECT * FROM collection");
+    response.json(collection.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 module.exports = pool;
 module.exports = {
   createUser,
@@ -173,4 +197,6 @@ module.exports = {
   getCards,
   getCardsByPokemon,
   deleteCard,
+  addCardToCollection,
+  getCollection,
 };
