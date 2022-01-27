@@ -22,15 +22,17 @@ app.get("/usersname/:username", db.getSpecificUserByUsername);
 
 app.post("/card", db.addCard);
 
-app.get("/cards", db.getCards);
+app.get("/card", db.getCards);
 
 app.get("/cards/:pokemon", db.getCardsByPokemon);
+
+app.get("/card/:card_id", db.getCardById);
 
 app.delete("/card/:id", db.deleteCard);
 
 app.post("/collection", db.addCardToCollection);
 
-app.get("/collection", db.getCollection);
+app.get("/collection/:collection_id", db.getCollection);
 
 app.listen(5000, () => {
   console.log("server has started on port 5000");
