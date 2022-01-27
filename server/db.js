@@ -193,12 +193,30 @@ const addCardToCollection = async (request, response) => {
 
 const getCollection = async (request, response) => {
   try {
-    const collection = await pool.query("SELECT * FROM collection");
-    response.json(collection.rows);
+    const { collection_id } = request.params;
+    const userCollection = await pool.query(
+      "SELECT * FROM collection WHERE collection_id = $1",
+      [collection_id]
+    );
+
+    response.json(userCollection.rows);
   } catch (err) {
     console.error(err.message);
   }
 };
+
+// const getCollection = async (request, response) => {
+//   try {
+//     const { collection_id } = request.params;
+//     const collection = await pool.query(
+//       "SELECT * FROM collection WHERE collection_id = $1",
+//       [collection_id]
+//     );
+//     response.json(collection.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// };
 
 module.exports = pool;
 module.exports = {
