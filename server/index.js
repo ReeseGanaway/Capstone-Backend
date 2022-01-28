@@ -34,6 +34,8 @@ app.post("/collection", db.addCardToCollection);
 
 app.get("/collection/:collection_id", db.getCollection);
 
+app.delete("/collection/:collection_id", db.deleteCollectionItem);
+
 app.listen(5000, () => {
   console.log("server has started on port 5000");
 });
