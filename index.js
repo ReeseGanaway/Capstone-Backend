@@ -41,7 +41,7 @@ app.post("/collection", db.addCardToCollection);
 app.get("/collection/:collection_id", async function (request, response) {
   try {
     const { collection_id } = request.params;
-    const userCollection = await db.pool.query(
+    const userCollection = await query(
       "SELECT * FROM collection WHERE collection_id = $1",
       [collection_id]
     );
