@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(compression());
 app.use(bodyParser.json());
 
-app.get("/", function (req, res) {
+app.get("/", function (res, req) {
   res.send("WORKING!");
 });
 
@@ -36,21 +36,7 @@ app.delete("/card/:id", db.deleteCard);
 
 app.post("/collection", db.addCardToCollection);
 
-//app.get("/collection/:collection_id", db.getCollection);
-
-app.get("/collection/:collection_id", async (request, response) => {
-  try {
-    const { collection_id } = request.params;
-    const userCollection = await pool.query(
-      "SELECT * FROM collection WHERE collection_id = $1",
-      [collection_id]
-    );
-
-    response.json(userCollection.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
+app.get("/collection/:collection_id", db.getCollection);
 
 app.delete("/collection/:collection_id", db.deleteCollectionItem);
 
