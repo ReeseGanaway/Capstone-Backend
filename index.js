@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(compression());
 app.use(bodyParser.json());
 
+app.get("/", function (res, req) {
+  res.send("WORKING!");
+});
+
 app.post("/signup", db.createUser);
 
 app.post("/users", db.login);
