@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(compression());
 app.use(bodyParser.json());
 
-app.get("/", function (res, req) {
+app.get("/", function (req, res) {
   res.send("WORKING!");
 });
 
