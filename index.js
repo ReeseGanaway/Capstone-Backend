@@ -38,7 +38,7 @@ app.post("/collection", db.addCardToCollection);
 
 //app.get("/collection/:collection_id", db.getCollection);
 
-app.get("/collection/:collection_id", function (request, response) {
+app.get("/collection/:collection_id", async function (request, response) {
   try {
     const { collection_id } = request.params;
     const userCollection = await pool.query(
