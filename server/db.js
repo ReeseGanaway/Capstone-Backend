@@ -205,6 +205,19 @@ const getCollection = async (request, response) => {
   }
 };
 
+const deleteCollectionItem = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const deleteCard = await pool.query(
+      "DELETE FROM collection WHERE card_id = $1",
+      [id]
+    );
+    response.json("Card was removed from the list!");
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 // const getCollection = async (request, response) => {
 //   try {
 //     const { collection_id } = request.params;
@@ -231,4 +244,5 @@ module.exports = {
   addCardToCollection,
   getCollection,
   getCardById,
+  deleteCollectionItem,
 };
