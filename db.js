@@ -9,9 +9,9 @@ const pool = new Pool({
   host: `${process.env.DB_HOST}`,
   port: process.env.DB_PORT || 5000,
   database: `${process.env.DB_DATABASE}`,
-  // ssl: {
-  //   rejectUnauthorized: false,
-  // },
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 //user table functions
