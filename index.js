@@ -40,6 +40,6 @@ app.get("/collection/:collection_id", db.getCollection);
 
 app.delete("/collection/:collection_id", db.deleteCollectionItem);
 
-app.listen(process.env.PORT || 3003, () => {
+app.listen(5000, () => {
   console.log("server has started on port 5000");
 });
