@@ -12,6 +12,7 @@ CREATE TABLE card (
     pokemon VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     hp VARCHAR(255) NOT NULL
+    image VARCHAR(255)
 );
 
 CREATE TABLE collection (
