@@ -1,20 +1,22 @@
 {
-  "name": "capstone-backend",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Backend portion of the TTP capstone project",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ReeseGanaway/Capstone-Backend.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ReeseGanaway/Capstone-Backend/issues"
-  },
-  "homepage": "https://github.com/ReeseGanaway/Capstone-Backend#readme"
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "pg": "^8.7.1"
+  }
 }

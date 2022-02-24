@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(compression());
 app.use(bodyParser.json());
 
+app.get("/", function (req, res) {
+  res.send("WORKING!");
+});
+
 app.post("/signup", db.createUser);
 
 app.post("/users", db.login);
@@ -36,6 +40,6 @@ app.get("/collection/:collection_id", db.getCollection);
 
 app.delete("/collection/:collection_id", db.deleteCollectionItem);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("server has started on port 5000");
 });
