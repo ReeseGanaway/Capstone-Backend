@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const compression = require("compression");
 const db = require("./db");
 
+res.header('Access-Control-Allow-Origin', '*');
+  next();
+
 //middleware
 app.use(cors());
 app.use(express.json());
